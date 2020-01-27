@@ -48,8 +48,20 @@ app.get('/notes', async (req, res) => {
         `
     }, `<div class="list-group">`)
     content += '</div>'
-    res.render('note', { data: { name: 'All Files', content } })
+    const headerAction = `
+    <a href="/notes/new">
+      <button class="btn btn-primary">New</button>
+    </a>
+    `
+    res.render('note', { data: { name: 'All Files', content, headerAction } })
   })
+})
+
+app.get('/notes/new', async (req, res) => {
+  const scripts = `
+    <script src="/edit.js"></script>
+    `
+  res.render('edit', { data: { name: 'Create New', content: '', scripts } })
 })
 
 app.get('/notes/:name', async (req, res) => {

@@ -16,7 +16,7 @@ let startContent = ''
 const render = () => {
   const result = md.render(sourceElement.value)
   resultElement.innerHTML = result
-  if (isEditPage && sourceElement.value !== startContent) {
+  if (isEditPage() && sourceElement.value !== startContent) {
     inputDesc.classList.add('invalid-feedback')
     inputDesc.innerText = 'Changes detected, please remember to save!'
     noteNameElement.classList.add('is-invalid')
@@ -38,9 +38,14 @@ const sendRequest = (fileName) => {
       name, value
     })
   }).then(d => d.json()).then(() => {
+    if (!isEditPage()) {
+      window.location = `/notes/${name}`
+      return
+    }
     inputDesc.classList.remove('invalid-feedback')
     inputDesc.innerText = 'Message to describe your change'
     noteNameElement.classList.remove('is-invalid')
+    noteNameElement.value = ''
   })
 }
 
