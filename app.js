@@ -66,7 +66,7 @@ app.get('/notes/:name', async (req, res) => {
     `
 
     const scripts = `
-    <script src="/edit.js"></script>
+    <script src="/changeLogs.js"></script>
     `
     res.render('note', {
       data: {
@@ -82,7 +82,7 @@ app.get('/notes/:name/edit', async (req, res) => {
     if (renderErrorPage(err, res)) {
       return
     }
-    const content = md.render(data.toString())
+    const content = data.toString()
     const scripts = `
     <script src="/edit.js"></script>
     `
@@ -112,6 +112,22 @@ app.post('/api/notes', async (req, res) => {
     try {
       await simpleGit.add(req.body.name)
       await simpleGit.commit('initial file')
+    } catch (err) {
+      console.log(err)
+    }
+    res.json(req.body)
+  })
+})
+
+app.put('/api/notes/:note', async (req, res) => {
+  const fileName = `./data/${req.params.note}`
+  fs.writeFile(fileName, req.body.value, async (err) => {
+    if (renderErrorPage(err, res, true)) {
+      return
+    }
+    try {
+      await simpleGit.add(req.params.note)
+      await simpleGit.commit(req.body.name || 'no description')
     } catch (err) {
       console.log(err)
     }
