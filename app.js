@@ -52,6 +52,28 @@ app.get('/notes', async (req, res) => {
   })
 })
 
+app.get('/notes/:name', async (req, res) => {
+  const notePath = `./data/${req.params.name}`
+  fs.readFile(notePath, (err, data) => {
+    if (renderErrorPage(err, res)) {
+      return
+    }
+    const content = md.render(data.toString())
+    res.render('note', { name: req.params.name, content })
+  })
+})
+
+app.get('/notes/:name', async (req, res) => {
+  const notePath = `./data/${req.params.name}`
+  fs.readFile(notePath, (err, data) => {
+    if (renderErrorPage(err, res)) {
+      return
+    }
+    const content = md.render(data.toString())
+    res.render('note', { name: req.params.name, content })
+  })
+})
+
 app.get('/show/:commit/:name', async (req, res) => {
   await simpleGit.checkout(req.params.commit)
   const name = req.params.name
