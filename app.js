@@ -66,7 +66,7 @@ app.get('/notes/:name', async (req, res) => {
     `
 
     const scripts = `
-    <script src="/changeLogs.js"></script>
+    <script src="/edit.js"></script>
     `
     res.render('note', {
       data: {
@@ -84,9 +84,9 @@ app.get('/notes/:name/edit', async (req, res) => {
     }
     const content = md.render(data.toString())
     const scripts = `
-    <script src="/changeLogs.js"></script>
+    <script src="/edit.js"></script>
     `
-    res.render('edit', { name: req.params.name, content, scripts })
+    res.render('edit', { data: { name: req.params.name, content, scripts } })
   })
 })
 
