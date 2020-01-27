@@ -1,0 +1,26 @@
+<%- include('./layout/header.ejs') %>
+<div class="container">
+  <h1>
+    Note Taker <small>demo</small>
+  </h1>
+  <div class="form-inline demo-options">
+    <div class="form-group not-strict">
+      <input class="form-control _tip" id="noteName" type="input" placeholder="Note Name" title="Name for Note">
+      <button class="saveButton btn btn-primary">Save</button>
+    </div>
+  </div>
+</div>
+<div class="container full-height">
+  <div class="row full-height">
+    <div class="col-xs-6 full-height">
+      <textarea class="source full-height"></textarea>
+    </div>
+    <section class="col-xs-6 full-height">
+      <div class="result-html full-height"></div>
+      <pre class="hljs result-src full-height"><code class="result-src-content full-height"></code></pre>
+      <pre class="hljs result-debug full-height"><code class="result-debug-content full-height"></code></pre>
+    </section>
+  </div>
+</div>
+<script src="./index.js"></script>
+<%- include('./layout/footer.ejs') %>

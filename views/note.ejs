@@ -1,14 +1,24 @@
 <%- include('./layout/header.ejs') %>
-<div class="container">
-  <h1>
-    <%= name %>
-  </h1>
+<div class="container" style="margin-top: 20px;">
+  <div class="d-flex justify-content-between">
+    <h1>
+      <%= data.name %>
+    </h1>
+    <% if (data.headerAction) { %>
+      <%- data.headerAction %>
+    <% } %>
+  </div>
+  <hr>
 </div>
-<div class="container full-height">
-  <div class="row full-height">
-    <div class="col-xs-6 offset-xs-3 full-height">
-      <%- content %>
+<div class="container">
+  <div class="row">
+    <div class="col-6 offset-3">
+      <%- data.content %>
     </div>
   </div>
 </div>
+<div id="logDisplay"></div>
+<% if (data.scripts) { %>
+  <%- data.scripts %>
+<% } %>
 <%- include('./layout/footer.ejs') %>

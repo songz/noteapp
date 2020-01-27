@@ -48,7 +48,7 @@ app.get('/notes', async (req, res) => {
         `
     }, `<div class="list-group">`)
     content += '</div>'
-    res.render('note', { name: 'All Files', content })
+    res.render('note', { data: { name: 'All Files', content } })
   })
 })
 
@@ -59,18 +59,34 @@ app.get('/notes/:name', async (req, res) => {
       return
     }
     const content = md.render(data.toString())
-    res.render('note', { name: req.params.name, content })
+    const headerAction = `
+    <a href="/notes/${req.params.name}/edit">
+      <button class="btn btn-primary">Edit</button>
+    </a>
+    `
+
+    const scripts = `
+    <script src="/changeLogs.js"></script>
+    `
+    res.render('note', {
+      data: {
+        name: req.params.name, content, headerAction, scripts
+      }
+    })
   })
 })
 
-app.get('/notes/:name', async (req, res) => {
+app.get('/notes/:name/edit', async (req, res) => {
   const notePath = `./data/${req.params.name}`
   fs.readFile(notePath, (err, data) => {
     if (renderErrorPage(err, res)) {
       return
     }
     const content = md.render(data.toString())
-    res.render('note', { name: req.params.name, content })
+    const scripts = `
+    <script src="/changeLogs.js"></script>
+    `
+    res.render('edit', { name: req.params.name, content, scripts })
   })
 })
 
@@ -83,12 +99,11 @@ app.get('/show/:commit/:name', async (req, res) => {
       return
     }
     const content = md.render(data.toString())
-    res.render('note', { name, content })
+    res.render('note', { data: { name, content } })
   })
 })
 
 app.post('/api/notes', async (req, res) => {
-  console.log('wtf', req.body)
   const fileName = `./data/${req.body.name}`
   fs.writeFile(fileName, req.body.value, async (err) => {
     if (renderErrorPage(err, res, true)) {

@@ -144,3 +144,22 @@ body {
   vertical-align: middle;
   width: auto;
 }
+
+#logDisplay {
+  position: fixed;
+  left: -390px;
+  bottom: -10px;
+  overflow: visible;
+  width: 400px;
+  transition:left 0.5s linear;
+}
+#logDisplay.open {
+  left: 10px;
+}
+#logDisplay > .header{
+  position: relative;
+  top: -30px;
+  left: 410px;
+  cursor: pointer;
+  display: inline-block;
+}
