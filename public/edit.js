@@ -38,14 +38,8 @@ const sendRequest = (fileName) => {
       name, value
     })
   }).then(d => d.json()).then(() => {
-    if (!isEditPage()) {
-      window.location = `/notes/${name}`
-      return
-    }
-    inputDesc.classList.remove('invalid-feedback')
-    inputDesc.innerText = 'Message to describe your change'
-    noteNameElement.classList.remove('is-invalid')
-    noteNameElement.value = ''
+    const noteNameValue = isEditPage() ? fileName : name
+    window.location = `/notes/${noteNameValue}`
   })
 }
 
