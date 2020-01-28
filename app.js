@@ -93,13 +93,24 @@ app.get('/notes/:name', async (req, res) => {
     }
     const content = md.render(data.toString())
     const headerAction = `
+    <div>
     <a href="/notes/${req.params.name}/edit">
       <button class="btn btn-primary">Edit</button>
     </a>
+    <button class="btn btn-danger deleteButton">Delete</button>
+    </div>
     `
 
     const scripts = `
     <script src="/changeLogs.js"></script>
+    <script>
+    const deleteButton = document.querySelector('.deleteButton')
+    deleteButton.addEventListener('click', () => {
+    if (confirm("You sure you want to delete ${req.params.name}")) {
+      window.location = "/notes/${req.params.name}/delete"
+    }
+    })
+    </script>
     `
     res.render('note', {
       data: {
@@ -120,6 +131,22 @@ app.get('/notes/:name/edit', async (req, res) => {
     <script src="/edit.js"></script>
     `
     res.render('edit', { data: { name: req.params.name, content, scripts } })
+  })
+})
+
+app.get('/notes/:name/delete', (req, res) => {
+  const notePath = `./data/${req.params.name}`
+  fs.unlink(notePath, async (err, data) => {
+    if (renderErrorPage(err, res)) {
+      return
+    }
+    try {
+      await simpleGit.add(req.params.name)
+      await simpleGit.commit(`remove file ${req.params.name}`)
+    } catch (err) {
+      console.log(err)
+    }
+    return res.redirect('/')
   })
 })
 
