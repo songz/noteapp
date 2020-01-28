@@ -1,18 +1,19 @@
 const express = require('express')
 const fs = require('fs')
+const util = require('util')
+const moment = require('moment')
 const path = require('path')
 const md = require('markdown-it')()
 const simpleGit = require('simple-git/promise')(path.resolve(`${__dirname}/data`))
+
+const getFileStat = util.promisify(fs.stat)
 const app = express()
+
 app.set('views', path.resolve(`${__dirname}/views`))
 app.set('view engine', 'ejs')
 app.use(express.urlencoded())
 app.use(express.json())
 app.use(express.static('public'))
-
-app.get('/', (req, res) => {
-  res.send('hello')
-})
 
 const renderErrorPage = (err, res, json) => {
   if (err) {
@@ -25,25 +26,35 @@ const renderErrorPage = (err, res, json) => {
   }
   return !!err
 }
+
 const excludedNames = {
   '.git': true
 }
 
-app.get('/notes', async (req, res) => {
-  fs.readdir(`./data`, (err, files) => {
+app.get(['/', '/notes'], (req, res) => {
+  fs.readdir(`./data`, async (err, files) => {
     if (renderErrorPage(err, res)) {
       return
     }
     const notes = files.filter(note => !excludedNames[note])
-    let content = notes.reduce((acc, note) => {
+
+    const noteResults = await Promise.all(notes.map(fname => {
+      return getFileStat(`./data/${fname}`)
+    }))
+    const notesInfo = noteResults.map((info, idx) => {
+      return {
+        ...info,
+        name: notes[idx]
+      }
+    }).sort((a, b) => b.mtimeMs - a.mtimeMs)
+    let content = notesInfo.reduce((acc, note, idx) => {
       return acc + `
-  <a href='/notes/${note}' class='list-group-item list-group-item-action flex-column align-items-start'>
+  <a href='/notes/${note.name}' class='list-group-item list-group-item-action flex-column align-items-start'>
     <div class='d-flex w-100 justify-content-between'>
-      <h5 class='mb-1'>${note}</h5>
-      <small>3 days ago</small>
+      <h5 class='mb-1'>${note.name}</h5>
+      <small>${moment(note.mtimeMs).fromNow()}</small>
     </div>
-    <p class='mb-1'>subtext1</p>
-    <small>subtext2</small>
+    <small>About ${Math.floor(note.size / 1000)} Kb</small>
   </a>
         `
     }, `<div class="list-group">`)
