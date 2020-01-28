@@ -123,7 +123,7 @@ app.get('/notes/:name/edit', async (req, res) => {
   })
 })
 
-app.get('/show/:commit/:name', async (req, res) => {
+app.get('/show/:commit/:name/edit', async (req, res) => {
   await simpleGit.checkout(req.params.commit)
   const name = req.params.name
   fs.readFile(`./data/${name}`, (err, data) => {
@@ -131,8 +131,11 @@ app.get('/show/:commit/:name', async (req, res) => {
     if (renderErrorPage(err, res)) {
       return
     }
-    const content = md.render(data.toString())
-    res.render('note', { data: { name, content } })
+    const content = data.toString()
+    const scripts = `
+    <script src="/edit.js"></script>
+    `
+    res.render('edit', { data: { name: req.params.name, content, scripts } })
   })
 })
 
