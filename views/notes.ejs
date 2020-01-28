@@ -1,0 +1,26 @@
+<%- include('./layout/header.ejs') %>
+<div class="container" style="margin-top: 20px;">
+  <div class="d-flex justify-content-between">
+    <h1>
+      <%= data.name %>
+    </h1>
+    <% if (data.headerAction) { %>
+      <%- data.headerAction %>
+    <% } %>
+  </div>
+  <hr>
+
+  <div class="row">
+    <div class="col-12">
+      <div class="card-columns">
+        <%- data.content %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="logDisplay"></div>
+<% if (data.scripts) { %>
+  <%- data.scripts %>
+<% } %>
+<%- include('./layout/footer.ejs') %>

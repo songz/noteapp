@@ -49,22 +49,32 @@ app.get(['/', '/notes'], (req, res) => {
     }).sort((a, b) => b.mtimeMs - a.mtimeMs)
     let content = notesInfo.reduce((acc, note, idx) => {
       return acc + `
-  <a href='/notes/${note.name}' class='list-group-item list-group-item-action flex-column align-items-start'>
-    <div class='d-flex w-100 justify-content-between'>
-      <h5 class='mb-1'>${note.name}</h5>
-      <small>${moment(note.mtimeMs).fromNow()}</small>
+    <div class="card">
+    <div class='card-body'>
+      <a href='/notes/${note.name}'>
+        <div class="d-flex justify-content-between">
+            <h5 class='card-title'>${note.name}</h5>
+
+            <small class="text-muted">
+      ~${Math.floor(note.size / 1000)} Kb
+            </small>
+        </div>
+      </a>
+      <p class="card-text">
+      <small class="text-muted">
+Modified ${moment(note.mtimeMs).fromNow()}
+      </small>
+      </p>
     </div>
-    <small>About ${Math.floor(note.size / 1000)} Kb</small>
-  </a>
+    </div>
         `
-    }, `<div class="list-group">`)
-    content += '</div>'
+    }, '')
     const headerAction = `
     <a href="/notes/new">
       <button class="btn btn-primary">New</button>
     </a>
     `
-    res.render('note', { data: { name: 'All Files', content, headerAction } })
+    res.render('notes', { data: { name: 'All Files', content, headerAction } })
   })
 })
 
