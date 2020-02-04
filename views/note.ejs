@@ -12,13 +12,15 @@
   <hr>
 
   <div class="row">
-    <div class="col-6 offset-3">
+    <div class="col-6 offset-3 note-content">
       <%- data.content %>
     </div>
   </div>
 </div>
 
 <div id="logDisplay"></div>
+<div class="dropZone"></div>
+<script src="/dropZone.js"></script>
 <% if (data.scripts) { %>
   <%- data.scripts %>
 <% } %>
