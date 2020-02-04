@@ -4,9 +4,11 @@ const util = require('util')
 const moment = require('moment')
 const path = require('path')
 const md = require('markdown-it')()
+const multer = require('multer')
 const simpleGit = require('simple-git/promise')(path.resolve(`${__dirname}/data`))
 
 const getFileStat = util.promisify(fs.stat)
+
 const app = express()
 
 app.set('views', path.resolve(`${__dirname}/views`))
@@ -14,6 +16,14 @@ app.set('view engine', 'ejs')
 app.use(express.urlencoded())
 app.use(express.json())
 app.use(express.static('public'))
+
+const storage = multer.diskStorage({
+  destination: 'public/assets',
+  filename: function (_, file, cb) {
+    cb(null, `${Date.now()}-${file.originalname.replace(/ /g, '-')}`)
+  }
+})
+const upload = multer({storage})
 
 const renderErrorPage = (err, res, json) => {
   if (err) {
@@ -30,6 +40,16 @@ const renderErrorPage = (err, res, json) => {
 const excludedNames = {
   '.git': true
 }
+
+app.post('/api/files', upload.any('assets'), (req, res) => {
+  const filePaths = req.files.map(f => {
+    return {
+      path: `/assets/${f.filename}`,
+      isImage: f.mimetype.includes('image')
+    }
+  })
+  res.json(filePaths)
+})
 
 app.get(['/', '/notes'], (req, res) => {
   fs.readdir(`./data`, async (err, files) => {

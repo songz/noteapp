@@ -16,3 +16,6 @@
   cursor: pointer;
   display: inline-block;
 }
+.note-content img {
+  width: 100%;
+}

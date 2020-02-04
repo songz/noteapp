@@ -34,7 +34,10 @@ body {
   border-radius: 4px;
 }
 .result-html img {
-  max-width: 35%;
+  width: 100%;
+}
+.note-content img {
+  width: 100%;
 }
 .result-src,
 .result-debug {
@@ -147,4 +150,19 @@ body {
 
 .formInput {
   margin-bottom: 10px;
+}
+
+.dropZone {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  display: flex;
+  margin: 10px;
+  width: 100px;
+  height: 100px;
+  border: 2px rgba(200,200,200, 0.5) dotted;
+}
+.dropZone.focused {
+  border: 2px rgba(105,255,105, 0.5) dotted;
+  background-color: rgba(105, 255, 105, 0.5);
 }
