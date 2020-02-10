@@ -11,14 +11,16 @@ const getFileStat = util.promisify(fs.stat)
 
 const app = express()
 
+const assetPath = '.noteapp-assets'
 app.set('views', path.resolve(`${__dirname}/views`))
 app.set('view engine', 'ejs')
 app.use(express.urlencoded())
 app.use(express.json())
 app.use(express.static('public'))
+app.use('/assets', express.static(`data/${assetPath}`))
 
 const storage = multer.diskStorage({
-  destination: 'public/assets',
+  destination: `data/${assetPath}`,
   filename: function (_, file, cb) {
     cb(null, `${Date.now()}-${file.originalname.replace(/ /g, '-')}`)
   }
@@ -42,11 +44,19 @@ const excludedNames = {
 }
 
 app.post('/api/files', upload.any('assets'), (req, res) => {
+  let allNames = ''
   const filePaths = req.files.map(f => {
+    allNames += `, ${f.filename}`
     return {
+      name: f.filename,
       path: `/assets/${f.filename}`,
       isImage: f.mimetype.includes('image')
     }
+  })
+  Promise.all(
+    filePaths.map(f => simpleGit.add(`${assetPath}/${f.name}`))
+  ).then(() => {
+    simpleGit.commit(`add files ${allNames}`)
   })
   res.json(filePaths)
 })

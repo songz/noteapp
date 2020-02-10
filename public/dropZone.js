@@ -15,10 +15,10 @@ const setupDropZone = () => {
 
   const clearDropEvent = createDropEvent(true)
 
-  dropZone.addEventListener('dragenter', createDropEvent(false))
-  dropZone.addEventListener('dragover', createDropEvent(false))
-  dropZone.addEventListener('dragleave', clearDropEvent)
-  dropZone.addEventListener('drop', (e) => {
+  document.body.addEventListener('dragenter', createDropEvent(false))
+  document.body.addEventListener('dragover', createDropEvent(false))
+  document.body.addEventListener('dragleave', clearDropEvent)
+  document.body.addEventListener('drop', (e) => {
     const files = e.target.files || e.dataTransfer.files
     if (!files.length) {
       return
