@@ -11,8 +11,7 @@ accepts@~1.3.7:
 
 append-field@^1.0.0:
   version "1.0.0"
-  resolved "http://npm.paypal.com/artifactory/api/npm/npm-all/append-field/-/append-field-1.0.0.tgz#1e3440e915f0b1203d23748e78edd7b9b5b43e56"
-  integrity sha1-HjRA6RXwsSA9I3SOeO3XubW0PlY=
+  resolved "https://registry.yarnpkg.com/append-field/-/append-field-1.0.0.tgz#1e3440e915f0b1203d23748e78edd7b9b5b43e56"
 
 argparse@^1.0.7:
   version "1.0.10"
@@ -41,13 +40,11 @@ body-parser@1.19.0:
 
 buffer-from@^1.0.0:
   version "1.1.1"
-  resolved "http://npm.paypal.com/artifactory/api/npm/npm-all/buffer-from/-/buffer-from-1.1.1.tgz#32713bc028f75c02fdb710d7c7bcec1f2c6070ef"
-  integrity sha1-MnE7wCj3XAL9txDXx7zsHyxgcO8=
+  resolved "https://registry.yarnpkg.com/buffer-from/-/buffer-from-1.1.1.tgz#32713bc028f75c02fdb710d7c7bcec1f2c6070ef"
 
 busboy@^0.2.11:
   version "0.2.14"
-  resolved "http://npm.paypal.com/artifactory/api/npm/npm-all/busboy/-/busboy-0.2.14.tgz#6c2a622efcf47c57bbbe1e2a9c37ad36c7925453"
-  integrity sha1-bCpiLvz0fFe7vh4qnDetNseSVFM=
+  resolved "https://registry.yarnpkg.com/busboy/-/busboy-0.2.14.tgz#6c2a622efcf47c57bbbe1e2a9c37ad36c7925453"
   dependencies:
     dicer "0.2.5"
     readable-stream "1.1.x"
@@ -58,8 +55,7 @@ bytes@3.1.0:
 
 concat-stream@^1.5.2:
   version "1.6.2"
-  resolved "http://npm.paypal.com/artifactory/api/npm/npm-all/concat-stream/-/concat-stream-1.6.2.tgz#904bdf194cd3122fc675c77fc4ac3d4ff0fd1a34"
-  integrity sha1-kEvfGUzTEi/Gdcd/xKw9T/D9GjQ=
+  resolved "https://registry.yarnpkg.com/concat-stream/-/concat-stream-1.6.2.tgz#904bdf194cd3122fc675c77fc4ac3d4ff0fd1a34"
   dependencies:
     buffer-from "^1.0.0"
     inherits "^2.0.3"
@@ -86,8 +82,7 @@ cookie@0.4.0:
 
 core-util-is@~1.0.0:
   version "1.0.2"
-  resolved "http://npm.paypal.com/artifactory/api/npm/npm-all/core-util-is/-/core-util-is-1.0.2.tgz#b5fd54220aa2bc5ab57aab7140c940754503c1a7"
-  integrity sha1-tf1UIgqivFq1eqtxQMlAdUUDwac=
+  resolved "https://registry.yarnpkg.com/core-util-is/-/core-util-is-1.0.2.tgz#b5fd54220aa2bc5ab57aab7140c940754503c1a7"
 
 debug@2.6.9:
   version "2.6.9"
@@ -111,8 +106,7 @@ destroy@~1.0.4:
 
 dicer@0.2.5:
   version "0.2.5"
-  resolved "http://npm.paypal.com/artifactory/api/npm/npm-all/dicer/-/dicer-0.2.5.tgz#5996c086bb33218c812c090bddc09cd12facb70f"
-  integrity sha1-WZbAhrszIYyBLAkL3cCc0S+stw8=
+  resolved "https://registry.yarnpkg.com/dicer/-/dicer-0.2.5.tgz#5996c086bb33218c812c090bddc09cd12facb70f"
   dependencies:
     readable-stream "1.1.x"
     streamsearch "0.1.2"
@@ -236,13 +230,11 @@ ipaddr.js@1.9.0:
 
 isarray@0.0.1:
   version "0.0.1"
-  resolved "http://npm.paypal.com/artifactory/api/npm/npm-all/isarray/-/isarray-0.0.1.tgz#8a18acfca9a8f4177e09abfc6038939b05d1eedf"
-  integrity sha1-ihis/Kmo9Bd+Cav8YDiTmwXR7t8=
+  resolved "https://registry.yarnpkg.com/isarray/-/isarray-0.0.1.tgz#8a18acfca9a8f4177e09abfc6038939b05d1eedf"
 
 isarray@~1.0.0:
   version "1.0.0"
-  resolved "http://npm.paypal.com/artifactory/api/npm/npm-all/isarray/-/isarray-1.0.0.tgz#bb935d48582cba168c06834957a54a3e07124f11"
-  integrity sha1-u5NdSFgsuhaMBoNJV6VKPgcSTxE=
+  resolved "https://registry.yarnpkg.com/isarray/-/isarray-1.0.0.tgz#bb935d48582cba168c06834957a54a3e07124f11"
 
 linkify-it@^2.0.0:
   version "2.2.0"
@@ -292,13 +284,11 @@ mime@1.6.0:
 
 minimist@0.0.8:
   version "0.0.8"
-  resolved "http://npm.paypal.com/artifactory/api/npm/npm-all/minimist/-/minimist-0.0.8.tgz#857fcabfc3397d2625b8228262e86aa7a011b05d"
-  integrity sha1-hX/Kv8M5fSYluCKCYuhqp6ARsF0=
+  resolved "https://registry.yarnpkg.com/minimist/-/minimist-0.0.8.tgz#857fcabfc3397d2625b8228262e86aa7a011b05d"
 
 mkdirp@^0.5.1:
   version "0.5.1"
-  resolved "http://npm.paypal.com/artifactory/api/npm/npm-all/mkdirp/-/mkdirp-0.5.1.tgz#30057438eac6cf7f8c4767f38648d6697d75c903"
-  integrity sha1-MAV0OOrGz3+MR2fzhkjWaX11yQM=
+  resolved "https://registry.yarnpkg.com/mkdirp/-/mkdirp-0.5.1.tgz#30057438eac6cf7f8c4767f38648d6697d75c903"
   dependencies:
     minimist "0.0.8"
 
@@ -320,8 +310,7 @@ ms@^2.1.1:
 
 multer@^1.4.2:
   version "1.4.2"
-  resolved "http://npm.paypal.com/artifactory/api/npm/npm-all/multer/-/multer-1.4.2.tgz#2f1f4d12dbaeeba74cb37e623f234bf4d3d2057a"
-  integrity sha1-Lx9NEtuu66dMs35iPyNL9NPSBXo=
+  resolved "https://registry.yarnpkg.com/multer/-/multer-1.4.2.tgz#2f1f4d12dbaeeba74cb37e623f234bf4d3d2057a"
   dependencies:
     append-field "^1.0.0"
     busboy "^0.2.11"
@@ -338,8 +327,7 @@ negotiator@0.6.2:
 
 object-assign@^4.1.1:
   version "4.1.1"
-  resolved "http://npm.paypal.com/artifactory/api/npm/npm-all/object-assign/-/object-assign-4.1.1.tgz#2109adc7965887cfc05cbbd442cac8bfbb360863"
-  integrity sha1-IQmtx5ZYh8/AXLvUQsrIv7s2CGM=
+  resolved "https://registry.yarnpkg.com/object-assign/-/object-assign-4.1.1.tgz#2109adc7965887cfc05cbbd442cac8bfbb360863"
 
 on-finished@^2.3.0, on-finished@~2.3.0:
   version "2.3.0"
@@ -357,8 +345,7 @@ path-to-regexp@0.1.7:
 
 process-nextick-args@~2.0.0:
   version "2.0.1"
-  resolved "http://npm.paypal.com/artifactory/api/npm/npm-all/process-nextick-args/-/process-nextick-args-2.0.1.tgz#7820d9b16120cc55ca9ae7792680ae7dba6d7fe2"
-  integrity sha1-eCDZsWEgzFXKmud5JoCufbptf+I=
+  resolved "https://registry.yarnpkg.com/process-nextick-args/-/process-nextick-args-2.0.1.tgz#7820d9b16120cc55ca9ae7792680ae7dba6d7fe2"
 
 proxy-addr@~2.0.5:
   version "2.0.5"
@@ -386,8 +373,7 @@ raw-body@2.4.0:
 
 readable-stream@1.1.x:
   version "1.1.14"
-  resolved "http://npm.paypal.com/artifactory/api/npm/npm-all/readable-stream/-/readable-stream-1.1.14.tgz#7cf4c54ef648e3813084c636dd2079e166c081d9"
-  integrity sha1-fPTFTvZI44EwhMY23SB54WbAgdk=
+  resolved "https://registry.yarnpkg.com/readable-stream/-/readable-stream-1.1.14.tgz#7cf4c54ef648e3813084c636dd2079e166c081d9"
   dependencies:
     core-util-is "~1.0.0"
     inherits "~2.0.1"
@@ -396,8 +382,7 @@ readable-stream@1.1.x:
 
 readable-stream@^2.2.2:
   version "2.3.7"
-  resolved "http://npm.paypal.com/artifactory/api/npm/npm-all/readable-stream/-/readable-stream-2.3.7.tgz#1eca1cf711aef814c04f62252a36a62f6cb23b57"
-  integrity sha1-Hsoc9xGu+BTAT2IlKjamL2yyO1c=
+  resolved "https://registry.yarnpkg.com/readable-stream/-/readable-stream-2.3.7.tgz#1eca1cf711aef814c04f62252a36a62f6cb23b57"
   dependencies:
     core-util-is "~1.0.0"
     inherits "~2.0.3"
@@ -462,18 +447,15 @@ sprintf-js@~1.0.2:
 
 streamsearch@0.1.2:
   version "0.1.2"
-  resolved "http://npm.paypal.com/artifactory/api/npm/npm-all/streamsearch/-/streamsearch-0.1.2.tgz#808b9d0e56fc273d809ba57338e929919a1a9f1a"
-  integrity sha1-gIudDlb8Jz2Am6VzOOkpkZoanxo=
+  resolved "https://registry.yarnpkg.com/streamsearch/-/streamsearch-0.1.2.tgz#808b9d0e56fc273d809ba57338e929919a1a9f1a"
 
 string_decoder@~0.10.x:
   version "0.10.31"
-  resolved "http://npm.paypal.com/artifactory/api/npm/npm-all/string_decoder/-/string_decoder-0.10.31.tgz#62e203bc41766c6c28c9fc84301dab1c5310fa94"
-  integrity sha1-YuIDvEF2bGwoyfyEMB2rHFMQ+pQ=
+  resolved "https://registry.yarnpkg.com/string_decoder/-/string_decoder-0.10.31.tgz#62e203bc41766c6c28c9fc84301dab1c5310fa94"
 
 string_decoder@~1.1.1:
   version "1.1.1"
-  resolved "http://npm.paypal.com/artifactory/api/npm/npm-all/string_decoder/-/string_decoder-1.1.1.tgz#9cf1611ba62685d7030ae9e4ba34149c3af03fc8"
-  integrity sha1-nPFhG6YmhdcDCunkujQUnDrwP8g=
+  resolved "https://registry.yarnpkg.com/string_decoder/-/string_decoder-1.1.1.tgz#9cf1611ba62685d7030ae9e4ba34149c3af03fc8"
   dependencies:
     safe-buffer "~5.1.0"
 
@@ -490,8 +472,7 @@ type-is@^1.6.4, type-is@~1.6.17, type-is@~1.6.18:
 
 typedarray@^0.0.6:
   version "0.0.6"
-  resolved "http://npm.paypal.com/artifactory/api/npm/npm-all/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
-  integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
+  resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
 
 uc.micro@^1.0.1, uc.micro@^1.0.5:
   version "1.0.6"
@@ -503,8 +484,7 @@ unpipe@1.0.0, unpipe@~1.0.0:
 
 util-deprecate@~1.0.1:
   version "1.0.2"
-  resolved "http://npm.paypal.com/artifactory/api/npm/npm-all/util-deprecate/-/util-deprecate-1.0.2.tgz#450d4dc9fa70de732762fbd2d4a28981419a0ccf"
-  integrity sha1-RQ1Nyfpw3nMnYvvS1KKJgUGaDM8=
+  resolved "https://registry.yarnpkg.com/util-deprecate/-/util-deprecate-1.0.2.tgz#450d4dc9fa70de732762fbd2d4a28981419a0ccf"
 
 utils-merge@1.0.1:
   version "1.0.1"
@@ -516,5 +496,4 @@ vary@~1.1.2:
 
 xtend@^4.0.0:
   version "4.0.2"
-  resolved "http://npm.paypal.com/artifactory/api/npm/npm-all/xtend/-/xtend-4.0.2.tgz#bb72779f5fa465186b1f438f674fa347fdb5db54"
-  integrity sha1-u3J3n1+kZRhrH0OPZ0+jR/2121Q=
+  resolved "https://registry.yarnpkg.com/xtend/-/xtend-4.0.2.tgz#bb72779f5fa465186b1f438f674fa347fdb5db54"
