@@ -140,6 +140,16 @@ app.get('/notes/:name', async (req, res) => {
   })
 })
 
+app.get('/raw/:name', async (req, res) => {
+  const notePath = `./data/${req.params.name}`
+  fs.readFile(notePath, (err, data) => {
+    if (renderErrorPage(err, res)) {
+      return
+    }
+    res.send( data.toString() )
+  })
+})
+
 app.get('/notes/:name/edit', async (req, res) => {
   const notePath = `./data/${req.params.name}`
   fs.readFile(notePath, (err, data) => {
