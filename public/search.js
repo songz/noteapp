@@ -1,4 +1,11 @@
 const searchBox = document.querySelector('#searchBox')
+const allNotes = document.querySelectorAll('.card-columns .card-title')
+const noteMap = Array.from(allNotes).reduce((acc, e) => {
+  const title = e.innerText.toLowerCase()
+  acc[title] = e.innerText
+  return acc
+}, {})
+
 let resultElements = []
 const resultContainer = document.querySelector('#resultListContainer')
 searchBox.focus()
@@ -18,13 +25,19 @@ const search = () => {
       }
     })
     resultContainer.innerHTML = ''
-    if (!dataArr.length) {
-      return
-    }
+    const newTitleMap = {...noteMap}
     resultElements = dataArr.map( (obj, idx) => {
+      delete newTitleMap[obj.title.toLowerCase()]
       return new Result(obj.title, obj.match, idx)
     })
-    console.log(dataArr)
+    Object.keys(newTitleMap).forEach( title => {
+      if (!title.includes(searchQuery.toLowerCase())) {
+        return
+      }
+      resultElements.push(
+        new Result(newTitleMap[title], '', resultElements.length)
+      )
+    })
   })
 }
 
