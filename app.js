@@ -98,12 +98,8 @@ Modified ${moment(note.mtimeMs).fromNow()}
     </div>
         `
     }, '')
-    const headerAction = `
-    <a href="/notes/new">
-      <button class="btn btn-primary">New</button>
-    </a>
-    `
-    res.render('notes', { data: { name: 'All Files', content, headerAction } })
+
+    res.render('notes', { data: { name: 'All Files', content } })
   })
 })
 

@@ -2,12 +2,15 @@
 <div class="container" style="margin-top: 20px;">
   <div class="d-flex justify-content-between">
     <h1>
-      <%= data.name %>
+      All Files
     </h1>
-    <% if (data.headerAction) { %>
-      <%- data.headerAction %>
-    <% } %>
+    <a href="/notes/new">
+      <button class="btn btn-primary">New</button>
+    </a>
   </div>
+  <hr>
+  <input type="text" style="width: 100%" id="searchBox">
+  <div id="resultListContainer"></div>
   <hr>
 
   <div class="row">
@@ -21,8 +24,5 @@
 
 <div id="logDisplay"></div>
 <div class="dropZone"></div>
-<script src="/dropZone.js"></script>
-<% if (data.scripts) { %>
-  <%- data.scripts %>
-<% } %>
+<script src="/search.js"></script>
 <%- include('./layout/footer.ejs') %>
