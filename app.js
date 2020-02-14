@@ -5,6 +5,7 @@ const moment = require('moment')
 const path = require('path')
 const multer = require('multer')
 const {setupGit} = require('./lib/git')
+const { spawn } = require('child_process')
 const {renderErrorPage} = require('./lib/render')
 const noteApiRouter = require('./routes/api/notes')
 const noteViewRouter = require('./routes/views/notes')
@@ -35,6 +36,11 @@ const excludedNames = {
   '.git': true,
   '.noteapp-assets': true,
 }
+
+app.get('/search/:query', (req, res) => {
+  const child = spawn('rg', [req.params.query, './data', '-im', '1']);
+  child.stdout.pipe(res);
+})
 
 app.post('/api/files', upload.any('assets'), (req, res) => {
   let allNames = ''
