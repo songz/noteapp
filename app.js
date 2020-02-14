@@ -3,9 +3,13 @@ const fs = require('fs')
 const util = require('util')
 const moment = require('moment')
 const path = require('path')
-const md = require('markdown-it')()
 const multer = require('multer')
-const simpleGit = require('simple-git/promise')(path.resolve(`${__dirname}/data`))
+const {setupGit} = require('./lib/git')
+const {renderErrorPage} = require('./lib/render')
+const noteApiRouter = require('./routes/api/notes')
+const noteViewRouter = require('./routes/views/notes')
+
+const simpleGit = setupGit(path.resolve(`${__dirname}/data`))
 
 const getFileStat = util.promisify(fs.stat)
 
@@ -27,20 +31,9 @@ const storage = multer.diskStorage({
 })
 const upload = multer({storage})
 
-const renderErrorPage = (err, res, json) => {
-  if (err) {
-    console.log('error', err)
-    if (json) {
-      return res.json({ error: err })
-    } else {
-      res.sendFile(path.resolve(`${__dirname}/public/error.html`))
-    }
-  }
-  return !!err
-}
-
 const excludedNames = {
-  '.git': true
+  '.git': true,
+  '.noteapp-assets': true,
 }
 
 app.post('/api/files', upload.any('assets'), (req, res) => {
@@ -108,48 +101,6 @@ Modified ${moment(note.mtimeMs).fromNow()}
   })
 })
 
-app.get('/notes/new', async (req, res) => {
-  const scripts = `
-    <script src="/edit.js"></script>
-    `
-  res.render('edit', { data: { name: 'Create New', content: '', scripts } })
-})
-
-app.get('/notes/:name', async (req, res) => {
-  const notePath = `./data/${req.params.name}`
-  fs.readFile(notePath, (err, data) => {
-    if (renderErrorPage(err, res)) {
-      return
-    }
-    const content = md.render(data.toString())
-    const headerAction = `
-    <div>
-    <a href="/notes/${req.params.name}/edit">
-      <button class="btn btn-primary">Edit</button>
-    </a>
-    <button class="btn btn-danger deleteButton">Delete</button>
-    </div>
-    `
-
-    const scripts = `
-    <script src="/changeLogs.js"></script>
-    <script>
-    const deleteButton = document.querySelector('.deleteButton')
-    deleteButton.addEventListener('click', () => {
-    if (confirm("You sure you want to delete ${req.params.name}")) {
-      window.location = "/notes/${req.params.name}/delete"
-    }
-    })
-    </script>
-    `
-    res.render('note', {
-      data: {
-        name: req.params.name, content, headerAction, scripts
-      }
-    })
-  })
-})
-
 app.get('/raw/:name', async (req, res) => {
   const notePath = `./data/${req.params.name}`
   fs.readFile(notePath, (err, data) => {
@@ -157,36 +108,6 @@ app.get('/raw/:name', async (req, res) => {
       return
     }
     res.send( data.toString() )
-  })
-})
-
-app.get('/notes/:name/edit', async (req, res) => {
-  const notePath = `./data/${req.params.name}`
-  fs.readFile(notePath, (err, data) => {
-    if (renderErrorPage(err, res)) {
-      return
-    }
-    const content = data.toString()
-    const scripts = `
-    <script src="/edit.js"></script>
-    `
-    res.render('edit', { data: { name: req.params.name, content, scripts } })
-  })
-})
-
-app.get('/notes/:name/delete', (req, res) => {
-  const notePath = `./data/${req.params.name}`
-  fs.unlink(notePath, async (err, data) => {
-    if (renderErrorPage(err, res)) {
-      return
-    }
-    try {
-      await simpleGit.add(req.params.name)
-      await simpleGit.commit(`remove file ${req.params.name}`)
-    } catch (err) {
-      console.log(err)
-    }
-    return res.redirect('/')
   })
 })
 
@@ -206,37 +127,8 @@ app.get('/show/:commit/:name/edit', async (req, res) => {
   })
 })
 
-app.post('/api/notes', async (req, res) => {
-  const fileName = `./data/${req.body.name}`
-  fs.writeFile(fileName, req.body.value, async (err) => {
-    if (renderErrorPage(err, res, true)) {
-      return
-    }
-    try {
-      await simpleGit.add(req.body.name)
-      await simpleGit.commit('initial file')
-    } catch (err) {
-      console.log(err)
-    }
-    res.json(req.body)
-  })
-})
-
-app.put('/api/notes/:note', async (req, res) => {
-  const fileName = `./data/${req.params.note}`
-  fs.writeFile(fileName, req.body.value, async (err) => {
-    if (renderErrorPage(err, res, true)) {
-      return
-    }
-    try {
-      await simpleGit.add(req.params.note)
-      await simpleGit.commit(req.body.name || 'no description')
-    } catch (err) {
-      console.log(err)
-    }
-    res.json(req.body)
-  })
-})
+app.use('/notes', noteViewRouter)
+app.use('/api/notes', noteApiRouter)
 
 app.get('/api/logs/:name', async (req, res) => {
   const logs = await simpleGit.log({ file: req.params.name })
