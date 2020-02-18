@@ -5,9 +5,14 @@
     <h1>
       <%= data.name %>
     </h1>
-    <% if (data.headerAction) { %>
-      <%- data.headerAction %>
-    <% } %>
+
+    <div>
+      <a href="/notes/<%- data.name %>/edit">
+        <button class="btn btn-primary">Edit</button>
+      </a>
+      <button class="btn btn-danger deleteButton">Delete</button>
+    </div>
+
   </div>
   <hr>
 
@@ -21,7 +26,17 @@
 <div id="logDisplay"></div>
 <div class="dropZone"></div>
 <script src="/dropZone.js"></script>
-<% if (data.scripts) { %>
-  <%- data.scripts %>
-<% } %>
+
+<script src="/changeLogs.js"></script>
+<script>
+const noteName = "<%- data.name %>"
+const deleteButton = document.querySelector('.deleteButton')
+deleteButton.addEventListener('click', () => {
+  if (confirm(`You sure you want to delete ${noteName}`)) {
+    window.location = `/notes/${noteName}/delete`
+  }
+})
+
+document.querySelector('.note-content').innerHTML = md.render(atob('<%- data.content %>'))
+</script>
 <%- include('./layout/footer.ejs') %>

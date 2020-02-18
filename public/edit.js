@@ -1,19 +1,6 @@
 /* global document fetch */
 
 // 2 use cases: New and edit
-const md = window.markdownit({
-  highlight: (str, lang) => {
-    lang = lang || 'js'
-    if(hljs.getLanguage(lang)) {
-      try {
-        return `<pre class="hljs"><code>${hljs.highlight(lang, str, true).value}</code></pre>`
-
-      } catch (__) { }
-      return '<pre class="hljs"><code>' + md.utils.escapeHtml(str) + '</code></pre>';
-    }
-    console.log('str ', lang, str)
-  }
-})
 const sourceElement = document.querySelector('.source')
 const resultElement = document.querySelector('.result-html')
 const saveElement = document.querySelector('.saveButton')

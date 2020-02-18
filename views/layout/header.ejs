@@ -19,4 +19,18 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js"></script>
   </head>
   <body>
+    <script>
+const md = window.markdownit({
+  highlight: (str, lang) => {
+    lang = lang || 'js'
+    if(hljs.getLanguage(lang)) {
+      try {
+        return `<pre class="hljs"><code>${hljs.highlight(lang, str, true).value}</code></pre>`
+
+      } catch (__) { }
+      return '<pre class="hljs"><code>' + md.utils.escapeHtml(str) + '</code></pre>';
+    }
+  }
+})
+    </script>
 
