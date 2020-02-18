@@ -32,5 +32,6 @@ const md = window.markdownit({
     }
   }
 })
+md.renderer.rules.table_open = () => (`<table class="table">`)
     </script>
 
