@@ -1,6 +1,6 @@
 /* global document fetch */
 
-const md = window.markdownit()
+// 2 use cases: New and edit
 const sourceElement = document.querySelector('.source')
 const resultElement = document.querySelector('.result-html')
 const saveElement = document.querySelector('.saveButton')

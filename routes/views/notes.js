@@ -20,30 +20,9 @@ router.get('/:name', async (req, res) => {
     if (renderErrorPage(err, res)) {
       return
     }
-    const content = md.render(data.toString())
-    const headerAction = `
-    <div>
-    <a href="/notes/${req.params.name}/edit">
-      <button class="btn btn-primary">Edit</button>
-    </a>
-    <button class="btn btn-danger deleteButton">Delete</button>
-    </div>
-    `
-
-    const scripts = `
-    <script src="/changeLogs.js"></script>
-    <script>
-    const deleteButton = document.querySelector('.deleteButton')
-    deleteButton.addEventListener('click', () => {
-    if (confirm("You sure you want to delete ${req.params.name}")) {
-      window.location = "/notes/${req.params.name}/delete"
-    }
-    })
-    </script>
-    `
     res.render('note', {
       data: {
-        name: req.params.name, content, headerAction, scripts
+        name: req.params.name, content: data.toString('base64')
       }
     })
   })

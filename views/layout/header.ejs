@@ -15,6 +15,22 @@
     <script src="https://twemoji.maxcdn.com/twemoji.min.js"></script>
     <script src="https://momentjs.com/downloads/moment.js"></script>
     <link rel="stylesheet" href="/index.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/solarized-light.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js"></script>
   </head>
   <body>
+    <script>
+const md = window.markdownit({
+  highlight: (str, lang) => {
+    lang = lang || 'js'
+    if(hljs.getLanguage(lang)) {
+      try {
+        return `<pre class="hljs"><code>${hljs.highlight(lang, str, true).value}</code></pre>`
+
+      } catch (__) { }
+      return '<pre class="hljs"><code>' + md.utils.escapeHtml(str) + '</code></pre>';
+    }
+  }
+})
+    </script>
 
