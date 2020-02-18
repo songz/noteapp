@@ -1,5 +1,6 @@
 /* global document fetch */
 
+// 2 use cases: New and edit
 const md = window.markdownit({
   highlight: (str, lang) => {
     lang = lang || 'js'
