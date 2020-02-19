@@ -19,3 +19,4 @@ else
     cd ..
     echo "Complete! This was a success. Enjoy!" 
 fi
+mkdir -p ./logs
