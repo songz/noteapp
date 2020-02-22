@@ -78,7 +78,6 @@ app.get(['/', '/notes'], (req, res) => {
 
     const content = Buffer.from(JSON.stringify(notesInfo)).toString('base64')
     res.render('notes', { data: {
-      name: 'All Files',
       content,
       path: 'home'
     } })
