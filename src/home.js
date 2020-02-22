@@ -1,7 +1,12 @@
 /* globals clientData */
 const moment = require('moment')
+const initSearch = require('./search')
+
+const noteMap = {}
 
 const contentStr = clientData.reduce((acc, note, idx) => {
+  const title = note.name.toLowerCase()
+  noteMap[title] = note.name
   return acc + `
   <div class="card">
     <div class='card-body'>
@@ -27,13 +32,14 @@ Modified ${moment(note.mtimeMs).fromNow()}
 module.exports = () => {
   const containerElement = document.querySelector('#mainAppElement')
   containerElement.innerHTML = `
-  <div class="row">
-    <div class="col-12">
-      <div class="card-columns">
-      ${contentStr}
+    <div class="row">
+      <div class="col-12">
+        <div class="card-columns">
+        ${contentStr}
+      </div>
+      <hr>
+      </div>
     </div>
-    <hr>
-    </div>
-  </div>
-`
+  `
+  initSearch(noteMap)
 }
