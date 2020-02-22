@@ -13,16 +13,19 @@
   <div id="resultListContainer"></div>
   <hr>
 
-  <div class="row">
-    <div class="col-12">
-      <div class="card-columns">
-        <%- data.content %>
-      </div>
-    </div>
-  </div>
+  <div id="mainAppElement"></div>
 </div>
 
 <div id="logDisplay"></div>
 <div class="dropZone"></div>
+
+<script>
+const clientStr = '<%- data.content %>'
+const clientData = JSON.parse(atob(clientStr)) || []
+const clientPath = '<%- data.path %>'
+console.log(clientData)
+</script>
+<script src="/main.js"></script>
+
 <script src="/search.js"></script>
 <%- include('./layout/footer.ejs') %>
