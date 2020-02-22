@@ -5,7 +5,9 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "setup": "./scripts/setup.sh"
+    "setup": "./scripts/setup.sh",
+    "server": "webpack --config webpack.config.js && node app.js",
+    "dev": "webpack --config webpack.config.js --watch && nodemon app.js"
   },
   "keywords": [],
   "author": "",
@@ -17,5 +19,9 @@
     "moment": "^2.24.0",
     "multer": "^1.4.2",
     "simple-git": "^1.131.0"
+  },
+  "devDependencies": {
+    "webpack": "^4.41.6",
+    "webpack-cli": "^3.3.11"
   }
 }

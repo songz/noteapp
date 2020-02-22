@@ -1,7 +1,6 @@
 const express = require('express')
 const fs = require('fs')
 const util = require('util')
-const moment = require('moment')
 const path = require('path')
 const multer = require('multer')
 const {setupGit} = require('./lib/git')
@@ -76,30 +75,13 @@ app.get(['/', '/notes'], (req, res) => {
         name: notes[idx]
       }
     }).sort((a, b) => b.mtimeMs - a.mtimeMs)
-    let content = notesInfo.reduce((acc, note, idx) => {
-      return acc + `
-    <div class="card">
-    <div class='card-body'>
-      <a href='/notes/${note.name}'>
-        <div class="d-flex justify-content-between">
-            <h5 class='card-title'>${note.name}</h5>
 
-            <small class="text-muted">
-      ~${Math.floor(note.size / 1000)} Kb
-            </small>
-        </div>
-      </a>
-      <p class="card-text">
-      <small class="text-muted">
-Modified ${moment(note.mtimeMs).fromNow()}
-      </small>
-      </p>
-    </div>
-    </div>
-        `
-    }, '')
-
-    res.render('notes', { data: { name: 'All Files', content } })
+    const content = Buffer.from(JSON.stringify(notesInfo)).toString('base64')
+    res.render('notes', { data: {
+      name: 'All Files',
+      content,
+      path: 'home'
+    } })
   })
 })
 
