@@ -1,41 +1,39 @@
-const initSearch = (noteMap) => {
-  const searchBox = document.querySelector('#searchBox')
-  const allNotes = document.querySelectorAll('.card-columns .card-title')
+const resultContainer = document.querySelector('#resultListContainer')
+const searchBox = document.querySelector('#searchBox')
+const allNotes = document.querySelectorAll('.card-columns .card-title')
+let resultElements = []
+let noteMap = {}
 
-  let resultElements = []
-  const resultContainer = document.querySelector('#resultListContainer')
-  searchBox.focus()
-  const search = () => {
-    const searchQuery = searchBox.value
-    if (searchQuery.length < 2) return
-    fetch(`/search/${searchQuery}`).then( r=> r.text() ).then(data => {
-      // invalidate old requests
-      if( searchBox.value !== searchQuery) return
-      const dataArr = data.split('\n').filter( d => d ).map( d => {
-        const result = d.substr(5) // get rid of data/ prefix
-        const resultArr = result.split(':')
-        const title = resultArr.shift()
-        const match = resultArr.join(':')
-        return {
-          title, match
-        }
-      })
-      resultContainer.innerHTML = ''
-      const newTitleMap = {...noteMap}
-      resultElements = dataArr.map( (obj, idx) => {
-        delete newTitleMap[obj.title.toLowerCase()]
-        return new Result(obj.title, obj.match, idx)
-      })
-      Object.keys(newTitleMap).forEach( title => {
-        if (!title.includes(searchQuery.toLowerCase())) {
-          return
-        }
-        resultElements.push(
-          new Result(newTitleMap[title], '', resultElements.length)
-        )
-      })
+const search = () => {
+  const searchQuery = searchBox.value
+  if (searchQuery.length < 2) return
+  fetch(`/search/${searchQuery}`).then( r=> r.text() ).then(data => {
+    // invalidate old requests
+    if( searchBox.value !== searchQuery) return
+    const dataArr = data.split('\n').filter( d => d ).map( d => {
+      const result = d.substr(5) // get rid of data/ prefix
+      const resultArr = result.split(':')
+      const title = resultArr.shift()
+      const match = resultArr.join(':')
+      return {
+        title, match
+      }
     })
-  }
+    resultContainer.innerHTML = ''
+    const newTitleMap = {...noteMap}
+    resultElements = dataArr.map( (obj, idx) => {
+      delete newTitleMap[obj.title.toLowerCase()]
+      return new Result(obj.title, obj.match, idx)
+    })
+    Object.keys(newTitleMap).forEach( title => {
+      if (!title.includes(searchQuery.toLowerCase())) {
+        return
+      }
+      resultElements.push(
+        new Result(newTitleMap[title], '', resultElements.length)
+      )
+    })
+  })
 }
 
 function Result(name, value, idx) {
@@ -69,5 +67,10 @@ searchBox.addEventListener('keyup', (e) => {
   }
   search()
 })
+
+const initSearch = (titleMap) => {
+  searchBox.focus()
+  noteMap = titleMap
+}
 
 module.exports = initSearch
