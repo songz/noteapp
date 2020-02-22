@@ -6,7 +6,9 @@ let noteMap = {}
 
 const search = () => {
   const searchQuery = searchBox.value
-  if (searchQuery.length < 2) return
+  if (searchQuery.length < 2) {
+    return resultContainer.innerHTML = ''
+  }
   fetch(`/search/${searchQuery}`).then( r=> r.text() ).then(data => {
     // invalidate old requests
     if( searchBox.value !== searchQuery) return
