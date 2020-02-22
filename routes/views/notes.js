@@ -11,7 +11,7 @@ router.get('/new', async (req, res) => {
   const scripts = `
     <script src="/edit.js"></script>
     `
-  res.render('edit', { data: { name: 'Create New', content: '', scripts } })
+  res.render('edit', { data: { name: 'Create New', content: '', scripts, path: 'new' } })
 })
 
 router.get('/:name', async (req, res) => {
@@ -22,7 +22,7 @@ router.get('/:name', async (req, res) => {
     }
     res.render('note', {
       data: {
-        name: req.params.name, content: data.toString('base64')
+        name: req.params.name, content: data.toString('base64'), path: 'view'
       }
     })
   })
@@ -55,24 +55,9 @@ router.get('/:name/edit', async (req, res) => {
     const scripts = `
     <script src="/edit.js"></script>
           `
-    res.render('edit', { data: { name: req.params.name, content, scripts } })
+    res.render('edit', { data: { name: req.params.name, content, scripts, path: 'edit' } })
   })
 })
 
-router.get('/:name/delete', (req, res) => {
-  const notePath = `./data/${req.params.name}`
-  fs.unlink(notePath, async (err, data) => {
-    if (renderErrorPage(err, res)) {
-      return
-    }
-    try {
-      await simpleGit.add(req.params.name)
-      await simpleGit.commit(`remove file ${req.params.name}`)
-    } catch (err) {
-      console.log(err)
-    }
-    return res.redirect('/')
-  })
-})
 module.exports = router
 
