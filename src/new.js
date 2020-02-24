@@ -1,3 +1,5 @@
+const md = require('markdown-it')()
+
 const setupNew = () => {
   const headerElement = document.createElement('div')
   const containerElement = document.createElement('div')
@@ -18,12 +20,14 @@ const setupNew = () => {
     </div>
   </div>
 </div>
+<div id="logDisplay"></div>
+<div class="dropZone"></div>
   `
 
   containerElement.innerHTML = `
   <div class="row full-height">
     <div class="col-6 full-height">
-      <textarea class="source full-height"><%- data.content %></textarea>
+      <textarea class="source full-height"></textarea>
     </div>
     <section class="col-6 full-height">
       <div class="result-html full-height"></div>
@@ -61,6 +65,9 @@ const setupNew = () => {
   const sendRequest = (fileName) => {
     const method = fileName ? 'PUT' : 'POST'
     const name = noteNameElement.value
+    if (!name || name.length < 2) {
+      return alert('invalid name')
+    }
     const value = sourceElement.value
     startContent = value
     const path = fileName || ''
