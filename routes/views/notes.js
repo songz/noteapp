@@ -1,6 +1,5 @@
 const express = require('express')
 const fs = require('fs')
-const md = require('markdown-it')()
 const path = require('path')
 const {getGit} = require('../../lib/git')
 const {renderErrorPage} = require('../../lib/render')
@@ -19,9 +18,13 @@ router.get('/:name', async (req, res) => {
     if (renderErrorPage(err, res)) {
       return
     }
-    res.render('note', {
+    const content = {
+      name: req.params.name, content: data.toString('base64'),
+    }
+    res.render('notes', {
       data: {
-        name: req.params.name, content: data.toString('base64'), path: 'view'
+        path: 'view',
+        content: JSON.stringify(content)
       }
     })
   })
@@ -50,11 +53,11 @@ router.get('/:name/edit', async (req, res) => {
     if (renderErrorPage(err, res)) {
       return
     }
-    const content = data.toString()
-    const scripts = `
-    <script src="/edit.js"></script>
-          `
-    res.render('edit', { data: { name: req.params.name, content, scripts, path: 'edit' } })
+    const content = data.toString('base64')
+    res.render('notes', { data: {
+      name: req.params.name,
+      content, path: 'edit'
+    } })
   })
 })
 

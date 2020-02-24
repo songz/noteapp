@@ -6,8 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "setup": "./scripts/setup.sh",
-    "server": "webpack --config webpack.config.js && node app.js",
-    "dev": "webpack --config webpack.config.js --watch && nodemon app.js"
+    "server": "webpack --config webpack.config.js && nodemon app.js",
+    "dev": "webpack --config webpack.config.js --watch"
   },
   "keywords": [],
   "author": "",
