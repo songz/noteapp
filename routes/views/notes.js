@@ -53,11 +53,15 @@ router.get('/:name/edit', async (req, res) => {
     if (renderErrorPage(err, res)) {
       return
     }
-    const content = data.toString('base64')
-    res.render('notes', { data: {
-      name: req.params.name,
-      content, path: 'edit'
-    } })
+    const content = {
+      name: req.params.name, content: data.toString('base64'),
+    }
+    res.render('notes', {
+      data: {
+        path: 'edit',
+        content: JSON.stringify(content)
+      }
+    })
   })
 })
 
