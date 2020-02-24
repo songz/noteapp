@@ -33,6 +33,7 @@ Modified ${moment(note.mtimeMs).fromNow()}
 
   const containerElement = document.querySelector('#mainAppElement')
   containerElement.innerHTML = `
+<div class="container" style="margin-top: 20px;">
   <div class="d-flex justify-content-between">
     <h1>
         All Files
@@ -55,6 +56,7 @@ Modified ${moment(note.mtimeMs).fromNow()}
       <hr>
       </div>
     </div>
+</div>
   `
   initSearch(noteMap)
 }

@@ -8,10 +8,9 @@ const {renderErrorPage} = require('../../lib/render')
 const router = express.Router()
 
 router.get('/new', async (req, res) => {
-  const scripts = `
-    <script src="/edit.js"></script>
-    `
-  res.render('edit', { data: { name: 'Create New', content: '', scripts, path: 'new' } })
+  res.render('notes', { data: {
+    content: '', path: 'new'
+  } })
 })
 
 router.get('/:name', async (req, res) => {
