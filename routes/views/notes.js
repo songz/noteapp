@@ -53,12 +53,13 @@ router.get('/:name/edit', async (req, res) => {
       return
     }
     const content = {
-      name: req.params.name, content: data.toString('base64'),
+      name: req.params.name
     }
     res.render('notes', {
       data: {
         path: 'edit',
-        content: JSON.stringify(content)
+        content: JSON.stringify(content),
+        rawData: encodeURIComponent(data.toString())
       }
     })
   })

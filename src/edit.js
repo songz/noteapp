@@ -1,7 +1,8 @@
 const setupEdit = () => {
   const clientData = JSON.parse(clientStr)
   const name = clientData.name
-  const content = atob(clientData.content)
+  const rawData = document.querySelector('#rawData')
+  const content = decodeURIComponent(rawData.innerHTML)
   const result = md.render(content)
 
   const headerElement = document.createElement('div')
