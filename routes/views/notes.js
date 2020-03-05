@@ -18,14 +18,13 @@ router.get('/:name', async (req, res) => {
     if (renderErrorPage(err, res)) {
       return
     }
-    const content = {
-      name: req.params.name, content: data.toString('base64'),
-    }
+    const content = { name: req.params.name }
     res.render('notes', {
       data: {
         path: 'view',
-        content: JSON.stringify(content)
-      }
+        content: JSON.stringify(content),
+        rawData: encodeURIComponent(data.toString())
+      },
     })
   })
 })
