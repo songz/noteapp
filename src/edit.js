@@ -1,4 +1,5 @@
 const { getContent, getName } = require('./lib')
+const { genHeaderHTML } = require('./edit-helper')
 
 const setupEdit = () => {
   const name = getName()
@@ -10,24 +11,7 @@ const setupEdit = () => {
   headerElement.className = 'container'
   containerElement.className = 'container full-height'
 
-  headerElement.innerHTML = `
-  <h1>
-    ${name}
-    <small>Edit</small>
-  </h1>
-  <div class="form-row formInput">
-    <div class="col-4">
-      <input class="form-control _tip" id="noteName" type="input" placeholder="Commit Message" title="Name for Note">
-        <small id="inputDesc" class="form-text">Quick 1 liner to describe this change</small>
-      </div>
-      <div class="col-2">
-        <button class="saveButton btn btn-primary">Create</button>
-      </div>
-    </div>
-  </div>
-  <div id="logDisplay"></div>
-  <div class="dropZone"></div>
-  `
+  headerElement.innerHTML = genHeaderHTML(name)
 
   containerElement.innerHTML = `
   <div class="row full-height">
