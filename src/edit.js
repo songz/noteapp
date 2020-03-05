@@ -1,8 +1,8 @@
+const { getContent, getName } = require('./lib')
+
 const setupEdit = () => {
-  const clientData = JSON.parse(clientStr)
-  const name = clientData.name
-  const rawData = document.querySelector('#rawData')
-  const content = decodeURIComponent(rawData.innerHTML)
+  const name = getName()
+  const content = getContent()
   const result = md.render(content)
 
   const headerElement = document.createElement('div')
