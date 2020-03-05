@@ -76,7 +76,7 @@ app.get(['/', '/notes'], (req, res) => {
       }
     }).sort((a, b) => b.mtimeMs - a.mtimeMs)
 
-    const content = Buffer.from(JSON.stringify(notesInfo)).toString('base64')
+    const content = JSON.stringify(notesInfo)
     res.render('notes', { data: {
       content,
       path: 'home'

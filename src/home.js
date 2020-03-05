@@ -5,7 +5,7 @@ const initSearch = require('./search')
 const noteMap = {}
 
 module.exports = () => {
-  const clientData = JSON.parse(atob(clientStr)) || []
+  const clientData = JSON.parse(clientStr) || []
   const contentStr = clientData.reduce((acc, note, idx) => {
     const title = note.name.toLowerCase()
     noteMap[title] = note.name
