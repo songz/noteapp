@@ -1,28 +1,8 @@
 const md = require('markdown-it')()
-const { genHeaderHTML } = require('./edit-helper')
+const { setupEditablePage } = require('./edit-helper')
 
 const setupNew = () => {
-  const headerElement = document.createElement('div')
-  const containerElement = document.createElement('div')
-  headerElement.className = 'container'
-  containerElement.className = 'container full-height'
-
-  headerElement.innerHTML = genHeaderHTML()
-
-  containerElement.innerHTML = `
-  <div class="row full-height">
-    <div class="col-6 full-height">
-      <textarea class="source full-height"></textarea>
-    </div>
-    <section class="col-6 full-height">
-      <div class="result-html full-height"></div>
-      <pre class="hljs result-src full-height"><code class="result-src-content full-height"></code></pre>
-      <pre class="hljs result-debug full-height"><code class="result-debug-content full-height"></code></pre>
-    </section>
-  </div>
-  `
-  document.body.append(headerElement)
-  document.body.append(containerElement)
+  setupEditablePage()
 
   // 2 use cases: New and edit
   const sourceElement = document.querySelector('.source')

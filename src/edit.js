@@ -1,32 +1,8 @@
 const { getContent, getName } = require('./lib')
-const { genHeaderHTML } = require('./edit-helper')
+const { setupEditablePage } = require('./edit-helper')
 
 const setupEdit = () => {
-  const name = getName()
-  const content = getContent()
-  const result = md.render(content)
-
-  const headerElement = document.createElement('div')
-  const containerElement = document.createElement('div')
-  headerElement.className = 'container'
-  containerElement.className = 'container full-height'
-
-  headerElement.innerHTML = genHeaderHTML(name)
-
-  containerElement.innerHTML = `
-  <div class="row full-height">
-    <div class="col-6 full-height">
-      <textarea class="source full-height">${content}</textarea>
-    </div>
-    <section class="col-6 full-height">
-      <div class="result-html full-height">${result}</div>
-      <pre class="hljs result-src full-height"><code class="result-src-content full-height"></code></pre>
-      <pre class="hljs result-debug full-height"><code class="result-debug-content full-height"></code></pre>
-    </section>
-  </div>
-  `
-  document.body.append(headerElement)
-  document.body.append(containerElement)
+  setupEditablePage(true)
 
   // 2 use cases: New and edit
   const sourceElement = document.querySelector('.source')
