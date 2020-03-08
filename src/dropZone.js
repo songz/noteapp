@@ -1,11 +1,16 @@
-const dropZone = document.querySelector('.dropZone')
 const setupDropZone = () => {
+  const dropZone = document.querySelector('#dropZone')
+  const title = document.querySelector('#dropZone__title')
+  if (!dropZone) {
+    return
+  }
   createDropEvent = (clear=true) => {
     return (e) => {
       if (clear) {
         dropZone.classList.remove('focused')
       } else {
         dropZone.classList.add('focused')
+        title.innerText = `Uploading ${e.dataTransfer.items.length} files`
       }
       e.preventDefault()
       e.stopPropagation()
@@ -48,6 +53,6 @@ const setupDropZone = () => {
   })
 }
 
-if (dropZone) {
-  setupDropZone()
+module.exports = {
+  setupDropZone
 }

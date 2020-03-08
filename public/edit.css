@@ -152,17 +152,20 @@ body {
   margin-bottom: 10px;
 }
 
-.dropZone {
+#dropZone {
   position: fixed;
-  top: 0px;
-  left: 0px;
-  display: flex;
-  margin: 10px;
-  width: 100px;
-  height: 100px;
-  border: 2px rgba(200,200,200, 0.5) dotted;
+  top: 20px;
+  right: 20px;
+  bottom: 20px;
+  left: 20px;
+  display: none;
+  border: 8px rgba(100,100,100) dotted;
+  background-color: rgba(105, 255, 105, 0.9);
+  z-index: 1;
+  align-items: center;
+  justify-content: center;
+  color: rgba(100,100,100);
 }
-.dropZone.focused {
-  border: 2px rgba(105,255,105, 0.5) dotted;
-  background-color: rgba(105, 255, 105, 0.5);
+#dropZone.focused {
+  display: flex;
 }
