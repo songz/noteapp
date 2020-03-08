@@ -1,4 +1,5 @@
 /* globals clientPath */
+const { setupChangeLogs } = require('./changeLogs')
 
 const setupHome = require('./home')
 const setupNew = require('./new')
@@ -16,7 +17,8 @@ const startApp = () => {
     return setupEdit()
   }
   if (clientPath === 'view') {
-    return setupView()
+    setupView()
+    return setupChangeLogs()
   }
 }
 startApp()

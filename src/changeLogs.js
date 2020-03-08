@@ -45,7 +45,13 @@ const startLogDisplay = () => {
   })
 }
 
-const logDisplay = document.querySelector('#logDisplay')
-if (logDisplay) {
-  startLogDisplay()
+const setupChangeLogs = () => {
+  const logDisplay = document.querySelector('#logDisplay')
+  if (logDisplay) {
+    startLogDisplay()
+  }
+}
+
+module.exports = {
+  setupChangeLogs
 }
