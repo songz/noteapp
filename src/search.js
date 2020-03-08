@@ -1,12 +1,14 @@
-const resultContainer = document.querySelector('#resultListContainer')
-const searchBox = document.querySelector('#searchBox')
-const allNotes = document.querySelectorAll('.card-columns .card-title')
+let resultContainer;
+let searchBox;
+let allNotes;
 let resultElements = []
 let noteMap = {}
 
 const search = () => {
   const searchQuery = searchBox.value
-  if (searchQuery.length < 2) return
+  if (searchQuery.length < 2) {
+    return resultContainer.innerHTML = ''
+  }
   fetch(`/search/${searchQuery}`).then( r=> r.text() ).then(data => {
     // invalidate old requests
     if( searchBox.value !== searchQuery) return
@@ -60,17 +62,20 @@ function Result(name, value, idx) {
   }
 }
 
-searchBox.addEventListener('keyup', (e) => {
-  console.log(e.key)
-  if (e.key === 'Enter') {
-    return resultElements[0].select()
-  }
-  search()
-})
-
 const initSearch = (titleMap) => {
+  resultContainer = document.querySelector('#resultListContainer')
+  searchBox = document.querySelector('#searchBox')
+  allNotes = document.querySelectorAll('.card-columns .card-title')
   searchBox.focus()
   noteMap = titleMap
+  searchBox.addEventListener('keyup', (e) => {
+    console.log(e.key)
+    if (e.key === 'Enter') {
+      return resultElements[0].select()
+    }
+    search()
+  })
+
 }
 
 module.exports = initSearch

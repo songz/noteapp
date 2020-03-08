@@ -48,3 +48,7 @@
 .resultContainer p {
   margin: 0;
 }
+
+#rawData {
+  display: none;
+}

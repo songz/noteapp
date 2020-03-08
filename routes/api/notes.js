@@ -41,4 +41,10 @@ router.put('/:note', async (req, res) => {
   })
 })
 
+router.get('/:name/logs', async (req, res) => {
+  const simpleGit = getGit()
+  const logs = await simpleGit.log({ file: req.params.name })
+  res.json(logs)
+})
+
 module.exports = router

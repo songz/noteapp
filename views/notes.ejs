@@ -1,31 +1,15 @@
 <%- include('./layout/header.ejs') %>
 <link rel="stylesheet" href="/edit.css">
-<div class="container" style="margin-top: 20px;">
-  <div class="d-flex justify-content-between">
-    <h1>
-      All Files
-    </h1>
-    <a href="/notes/new">
-      <button class="btn btn-primary">New</button>
-    </a>
-  </div>
-  <hr>
-  <input type="text" style="width: 100%" id="searchBox">
-  <div id="resultListContainer"></div>
-  <hr>
-
-  <div id="mainAppElement"></div>
-</div>
-
-<div id="logDisplay"></div>
-<div class="dropZone"></div>
+<div id="mainAppElement"></div>
 
 <script>
 const clientStr = '<%- data.content %>'
-const clientData = JSON.parse(atob(clientStr)) || []
 const clientPath = '<%- data.path %>'
-console.log(clientData)
 </script>
+<pre id="rawData"><%- data.rawData -%></pre>
+
+<div id="logDisplay"></div>
+
 <script src="/main.js"></script>
 
 <%- include('./layout/footer.ejs') %>

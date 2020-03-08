@@ -1,6 +1,5 @@
 const express = require('express')
 const fs = require('fs')
-const md = require('markdown-it')()
 const path = require('path')
 const {getGit} = require('../../lib/git')
 const {renderErrorPage} = require('../../lib/render')
@@ -8,10 +7,9 @@ const {renderErrorPage} = require('../../lib/render')
 const router = express.Router()
 
 router.get('/new', async (req, res) => {
-  const scripts = `
-    <script src="/edit.js"></script>
-    `
-  res.render('edit', { data: { name: 'Create New', content: '', scripts, path: 'new' } })
+  res.render('notes', { data: {
+    content: '', path: 'new'
+  } })
 })
 
 router.get('/:name', async (req, res) => {
@@ -20,10 +18,13 @@ router.get('/:name', async (req, res) => {
     if (renderErrorPage(err, res)) {
       return
     }
-    res.render('note', {
+    const content = { name: req.params.name }
+    res.render('notes', {
       data: {
-        name: req.params.name, content: data.toString('base64'), path: 'view'
-      }
+        path: 'view',
+        content: JSON.stringify(content),
+        rawData: encodeURIComponent(data.toString())
+      },
     })
   })
 })
@@ -51,11 +52,40 @@ router.get('/:name/edit', async (req, res) => {
     if (renderErrorPage(err, res)) {
       return
     }
-    const content = data.toString()
-    const scripts = `
-    <script src="/edit.js"></script>
-          `
-    res.render('edit', { data: { name: req.params.name, content, scripts, path: 'edit' } })
+    const content = {
+      name: req.params.name
+    }
+    res.render('notes', {
+      data: {
+        path: 'edit',
+        content: JSON.stringify(content),
+        rawData: encodeURIComponent(data.toString())
+      }
+    })
+  })
+})
+
+router.get('/:name/edit/:commit', async (req, res) => {
+  const simpleGit = getGit()
+  await simpleGit.checkout(req.params.commit)
+  const name = req.params.name
+  const notePath = `./data/${req.params.name}`
+  fs.readFile(notePath, (err, data) => {
+    // checkout master MUST be the FIRST command to never mess up `data` folder
+    simpleGit.checkout('master')
+    if (renderErrorPage(err, res)) {
+      return
+    }
+    const content = {
+      name: req.params.name
+    }
+    res.render('notes', {
+      data: {
+        path: 'edit',
+        content: JSON.stringify(content),
+        rawData: encodeURIComponent(data.toString())
+      }
+    })
   })
 })
 
