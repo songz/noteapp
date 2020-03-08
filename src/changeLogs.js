@@ -1,20 +1,19 @@
 /* global fetch moment */
 const startLogDisplay = () => {
   const [fileName] = window.location.pathname.split('/').splice(2)
-  fetch(`/api/logs/${fileName}`).then(r => r.json()).then(data => {
+  fetch(`/api/notes/${fileName}/logs`).then(r => r.json()).then(data => {
     const commits = data.all || []
     if (!commits.length) return
     let startContent = `
     <div class="logContainer list-group">
     `
-    console.log('commits', commits)
     startContent = commits.reduce((acc, commit) => {
       const { hash, message, date, body } = commit
       const [dDate, dTime, dDiff] = date.split(' ')
       const ago = moment(`${dDate} ${dTime}${dDiff}`).fromNow()
       const hashDisplay = `${hash.substr(0, 20)}...`
       return acc + `
-  <a href='/show/${hash}/${fileName}/edit' class='list-group-item list-group-item-action flex-column align-items-start'>
+  <a href='/notes/${fileName}/edit/${hash}' class='list-group-item list-group-item-action flex-column align-items-start'>
     <div class='d-flex w-100 justify-content-between'>
       <h5 class='mb-1'>${hashDisplay}</h5>
       <small>${ago}</small>

@@ -65,5 +65,29 @@ router.get('/:name/edit', async (req, res) => {
   })
 })
 
+router.get('/:name/edit/:commit', async (req, res) => {
+  const simpleGit = getGit()
+  await simpleGit.checkout(req.params.commit)
+  const name = req.params.name
+  const notePath = `./data/${req.params.name}`
+  fs.readFile(notePath, (err, data) => {
+    // checkout master MUST be the FIRST command to never mess up `data` folder
+    simpleGit.checkout('master')
+    if (renderErrorPage(err, res)) {
+      return
+    }
+    const content = {
+      name: req.params.name
+    }
+    res.render('notes', {
+      data: {
+        path: 'edit',
+        content: JSON.stringify(content),
+        rawData: encodeURIComponent(data.toString())
+      }
+    })
+  })
+})
+
 module.exports = router
 

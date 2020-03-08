@@ -94,22 +94,6 @@ app.get('/raw/:name', async (req, res) => {
   })
 })
 
-app.get('/show/:commit/:name/edit', async (req, res) => {
-  await simpleGit.checkout(req.params.commit)
-  const name = req.params.name
-  fs.readFile(`./data/${name}`, (err, data) => {
-    simpleGit.checkout('master')
-    if (renderErrorPage(err, res)) {
-      return
-    }
-    const content = data.toString()
-    const scripts = `
-    <script src="/edit.js"></script>
-    `
-    res.render('edit', { data: { name: req.params.name, content, scripts } })
-  })
-})
-
 app.use('/notes', noteViewRouter)
 app.use('/api/notes', noteApiRouter)
 
