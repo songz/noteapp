@@ -2,3 +2,5 @@ data
 public/assets
 logs
 public/main.js
+node_modules
+.git
