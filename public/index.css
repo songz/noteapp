@@ -1,3 +1,22 @@
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #444 !important;
+    color: #e4e4e4;
+  }
+  a {
+    color: #e39777;
+  }
+  img {
+    filter: grayscale(30%);
+  }
+  textarea, input {
+    background-color: #eee !important;
+  }
+  .result-html {
+    background-color: transparent !important;
+  }
+}
+
 #logDisplay {
   position: fixed;
   left: -390px;
