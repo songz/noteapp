@@ -108,4 +108,4 @@ app.get("/api/logs/:name", async (req, res) => {
   res.json(logs);
 });
 
-app.listen(3030); // notes.slacker.club
+app.listen(process.env.PORT || 3030); // notes.slacker.club
